@@ -5,12 +5,14 @@ import { TransparentButton } from "../../components/TransparentButton"
 import { Container, StyledHeader, List, ListItem } from "./styles"
 import { useRecoilValue } from "recoil"
 import { userAtom } from "../../recoil/atoms/userAtom"
+import { useLogout } from "../../hooks/useLogout"
 
 export const Header = () => {
+    const { logout } = useLogout()
 
     const user = useRecoilValue(userAtom)
     const onAskForLogout = () => {
-        console.log('logout')
+        logout()
     }
 
     return (<StyledHeader>
