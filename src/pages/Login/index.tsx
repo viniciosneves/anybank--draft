@@ -4,9 +4,14 @@ import { Figure, Form, FormActions, Heading, Image } from "../../components/Form
 import { FormLabel } from "../../components/FormLabel";
 import { TextField } from "../../components/TextField";
 import { Button } from "../../components/Button";
+import { useAuthenticateUser } from "../../hooks/useAuthenticateUser";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 export const Login = () => {
     const [credentials, setCredentials] = useState({ email: '', password: '' });
+    const { authenticate } = useAuthenticateUser()
+    const navigate = useNavigate();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -16,9 +21,18 @@ export const Login = () => {
         }));
     };
 
-    const loginUser = (evt: React.FormEvent<HTMLFormElement>) => {
+    const loginUser = async (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
         console.log(credentials);
+        try {
+            await authenticate(credentials.email, credentials.password)
+            setCredentials({ email: '', password: '' });
+            toast.success('Autenticado com sucesso!')
+            navigate("/");
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+            toast.error(error?.message || 'Falha ao autenticar!')
+        }
     };
 
     return (

@@ -3,9 +3,12 @@ import { Button } from "../../components/Button"
 import { IconAvatar, IconLogo } from "../../components/Icons"
 import { TransparentButton } from "../../components/TransparentButton"
 import { Container, StyledHeader, List, ListItem } from "./styles"
+import { useRecoilValue } from "recoil"
+import { userAtom } from "../../recoil/atoms/userAtom"
 
 export const Header = () => {
 
+    const user = useRecoilValue(userAtom)
     const onAskForLogout = () => {
         console.log('logout')
     }
@@ -31,7 +34,7 @@ export const Header = () => {
                     </Button>
                 </ListItem>
                 <ListItem>
-                    Joana da Silva Oliveira
+                    {user?.name}
                 </ListItem>
                 <ListItem>
                     <IconAvatar />
