@@ -16,4 +16,13 @@ export class UserDexieRepository implements IUserRepository {
       throw new Error("Falha ao criar o usuário");
     }
   }
+  async findByEmail(email: string): Promise<IUser | null> {
+    try {
+      const user = await db.users.where('email').equals(email).first();
+      return user ?? null;
+    } catch (error) {
+      console.error("Erro ao buscar usuário por email no Dexie:", error);
+      throw new Error("Falha ao buscar o usuário");
+    }
+  }
 }
