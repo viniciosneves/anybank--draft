@@ -4,12 +4,13 @@ import { Fieldset } from "../Fieldset";
 import { FormLabel } from "../FormLabel";
 import { TextField } from "../TextField";
 import { Figure, Form, FormActions, Heading, Image } from "../Form";
+import { CreateUser } from "../../domain/useCases/CreateUser";
+import { UserDexieRepository } from "../../infrastructure/dexie/UserDexieRepository";
+import { toast } from "react-toastify";
 
-interface FormRegisterProps {
-    onRegister: (user: { name: string, email: string, password: string }) => void
-}
+const createUserUseCase = new CreateUser(new UserDexieRepository()); 
 
-export const FormRegister = ({ onRegister }: FormRegisterProps) => {
+export const FormRegister = () => {
     const [user, setUser] = useState({ name: '', email: '', password: '' });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,10 +21,17 @@ export const FormRegister = ({ onRegister }: FormRegisterProps) => {
         }));
     };
 
-    const registerUser = (evt: React.FormEvent<HTMLFormElement>) => {
+    const registerUser = async (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
-        console.log(user);
-        onRegister(user)
+        try {
+            await createUserUseCase.execute(user)
+            setUser({ name: '', email: '', password: '' })
+            toast.success('Usuário cadastrado com sucesso!')
+        } catch (error) {
+            console.log('falha ao cadastrar usuário', error);
+            toast.error('Falha ao cadastrar usuário!')
+
+        }
     };
 
     return (
