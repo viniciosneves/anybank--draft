@@ -1,15 +1,11 @@
 import { useState } from "react";
-import { Button } from "../Button";
-import { Fieldset } from "../Fieldset";
-import { Figure, Form, FormActions, Heading, Image } from "../Form";
-import { FormLabel } from "../FormLabel";
-import { TextField } from "../TextField";
+import { Fieldset } from "../../components/Fieldset";
+import { Figure, Form, FormActions, Heading, Image } from "../../components/Form";
+import { FormLabel } from "../../components/FormLabel";
+import { TextField } from "../../components/TextField";
+import { Button } from "../../components/Button";
 
-interface FormLoginProps {
-    onLogin: () => void
-}
-
-export const FormLogin = ({ onLogin }: FormLoginProps) => {
+export const Login = () => {
     const [credentials, setCredentials] = useState({ email: '', password: '' });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +19,6 @@ export const FormLogin = ({ onLogin }: FormLoginProps) => {
     const loginUser = (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
         console.log(credentials);
-        onLogin()
     };
 
     return (

@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { Button } from "../Button";
-import { Fieldset } from "../Fieldset";
-import { FormLabel } from "../FormLabel";
-import { TextField } from "../TextField";
-import { Figure, Form, FormActions, Heading, Image } from "../Form";
+import { Button } from "../../components/Button";
+import { Fieldset } from "../../components/Fieldset";
+import { FormLabel } from "../../components/FormLabel";
+import { TextField } from "../../components/TextField";
+import { Figure, Form, FormActions, Heading, Image } from "../../components/Form";
 import { CreateUser } from "../../domain/useCases/CreateUser";
 import { UserDexieRepository } from "../../infrastructure/dexie/UserDexieRepository";
 import { toast } from "react-toastify";
 
 const createUserUseCase = new CreateUser(new UserDexieRepository()); 
 
-export const FormRegister = () => {
+export const Register = () => {
     const [user, setUser] = useState({ name: '', email: '', password: '' });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
