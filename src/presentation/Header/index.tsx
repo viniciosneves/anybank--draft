@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
-import { Button } from "../Button"
-import { IconAvatar, IconLogo } from "../Icons"
-import { TransparentButton } from "../TransparentButton"
+import { Button } from "../../components/Button"
+import { IconAvatar, IconLogo } from "../../components/Icons"
+import { TransparentButton } from "../../components/TransparentButton"
 import { Container, StyledHeader, List, ListItem } from "./styles"
 
 export const Header = () => {
