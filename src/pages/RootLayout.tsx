@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { Outlet } from "react-router"
 import { Header } from "../presentation/Header"
+import { RecoilProvider } from "../recoil/RecoilProvider"
 
 const Container = styled.div`
   display: flex;
@@ -13,12 +14,12 @@ const Container = styled.div`
 const RootLayout = () => {
 
     return (
-        <>
+        <RecoilProvider>
             <Header />
             <Container>
                 <Outlet />
             </Container>
-        </>
+        </RecoilProvider>
     )
 }
 
